@@ -75,7 +75,9 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+```
 
 ## 效果图
 
+[](https://github.com/xiaomaxuetu/treeSelect/blob/master/lib/example/demo.gif)
 
