@@ -1,7 +1,7 @@
 name: tree_select
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+homepage: https://github.com/xiaomaxuetu/treeSelect
 
 environment:
   sdk: ">=2.15.1 <3.0.0"

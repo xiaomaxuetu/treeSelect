@@ -1,39 +1,81 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+# tree_select
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+树形选择组件
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## 使用方法
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
 ```
+import 'package:flutter/material.dart';
 
-## Additional information
+import '../tree_select.dart';
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+void main() {
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: {"/": (context) => const MyApp()},
+    );
+  }
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Node> nodes = [
+    Node(key: '0', label: '0', children: [
+      Node(key: '0_0', label: '0_0', children: [
+        Node(key: '0_0_0', label: '0_0_0'),
+        Node(key: '0_0_1', label: '0_0_1')
+      ]),
+      Node(key: '0_1', label: '0_1')
+    ]),
+    Node(key: '1', label: '1')
+  ];
+  String checkStr = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("treeSelect"),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+                flex: 9,
+                child: TreeViewContainer(
+                  children: nodes,
+                  onCheck: (list) {
+                    var str = list.map((e) => e.label).join(",");
+                    setState(() {
+                      checkStr = str;
+                    });
+                  },
+                  onNodeClick: (node) {
+                    print("点击了${node.label}");
+                  },
+                )),
+            Expanded(flex: 1, child: Text(checkStr))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+## 效果图
+
+
